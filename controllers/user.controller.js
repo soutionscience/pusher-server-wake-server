@@ -1,6 +1,7 @@
 let User = require('../model/users.model');
 
 exports.post =  (req, res, next)=>{
+    console.log('hitting post')
     let newUser = new User(req.body)
     newUser.save((err, resp)=>{
         if(err){

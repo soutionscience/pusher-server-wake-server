@@ -31,11 +31,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-distanceScript.get()
+app.use('/api/users', usersRouter);
 
 
+
+
+
+mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err, db){
+  if(err) throw err
+  console.log("connected: ", db.host);
+  database=db
+
+})
+
+//distanceScript.get();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,7 +6,9 @@
     "start": "nodemon index"
   },
   "dependencies": {
+    "@types/node": "^14.0.9",
     "cookie-parser": "~1.4.4",
+    "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dot-env": "0.0.1",
