@@ -12,6 +12,8 @@ let cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+let tripRouter = require('./routes/trips.routes')
+
 let distanceScript = require('./scripts/getDistance')
 
 var app = express();
@@ -32,12 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/trips', tripRouter)
 
 
 
 
 
-mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err, db){
+mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, db){
   if(err) throw err
   console.log("connected: ", db.host);
   database=db

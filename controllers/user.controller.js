@@ -28,3 +28,7 @@ exports.delete =(req, res, next)=>{
 
 }
 
+exports.postTrip=()=>{
+    
+}
+
