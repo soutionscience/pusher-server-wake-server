@@ -1,7 +1,7 @@
 const mongoose= require('mongoose');
 const schema = mongoose.Schema;
 
-let trip = new schema(
+let Distance = new schema(
     {
     origin: String,
     destination: String,
@@ -10,4 +10,4 @@ let trip = new schema(
 )
 
 
-module.exports = mongoose.model('trip', trip)
+module.exports = mongoose.model('distance', Distance)
