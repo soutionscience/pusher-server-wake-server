@@ -15,6 +15,7 @@ var usersRouter = require('./routes/users');
 let tripRouter = require('./routes/trips.routes')
 
 let distanceScript = require('./scripts/getDistance');
+let callScript = require('./scripts/makeCall')
 let distanceRouter = require('./routes/distance')
 
 var app = express();
@@ -50,6 +51,7 @@ mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err,
 })
 
 //distanceScript.get();
+//callScript.call()
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
