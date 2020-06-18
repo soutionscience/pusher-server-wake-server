@@ -16,7 +16,8 @@ let tripRouter = require('./routes/trips.routes')
 
 let distanceScript = require('./scripts/getDistance');
 let callScript = require('./scripts/makeCall')
-let distanceRouter = require('./routes/distance')
+let distanceRouter = require('./routes/distance');
+let callRouter = require('./routes/call.route')
 
 var app = express();
  app.use(cors())
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripRouter);
 app.use('/api/distance', distanceRouter)
+app.use('/api/call', callRouter)
 
 app.use(express.static(path.join(__dirname, 'public')));
 

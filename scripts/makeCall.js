@@ -6,7 +6,7 @@ const authToken = process.env.twilioKey
 const client = require('twilio')(accountSid, authToken)
 
 
-exports.call = ()=>{
+exports.post = (req, res, next)=>{
     console.log('making call');
     client.calls.create({
         twiml:'<Responce><Say>You have arrived</Say></Responce>',
@@ -14,9 +14,9 @@ exports.call = ()=>{
         from:'+13174746606'
     }, function(err, call){
         if(err){
-            console.log('error ', err)
+            res.status(400).send(err)
         }else{
-            console.log('called ',call)
+            res.status(200).json({"data": "call"})
         }
     })
     
