@@ -8,8 +8,15 @@ const controller= require("../controllers/user.controller")
 router.route('/')
 .post(controller.post)
 .get(controller.get)
+.delete(controller.delete)
 
-router.route(':/id')
+
+router.route('/:id/verify')
+.post(controller.verify)
+
+router.route('/:id')
+
+
 
 
 

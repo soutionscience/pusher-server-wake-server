@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var flash = require('connect-flash');
+var session = require('express-session');
+
+
+
 
 let mongoose = require('mongoose')
 
@@ -17,10 +22,19 @@ let tripRouter = require('./routes/trips.routes')
 let distanceScript = require('./scripts/getDistance');
 let callScript = require('./scripts/makeCall')
 let distanceRouter = require('./routes/distance');
-let callRouter = require('./routes/call.route')
+let callRouter = require('./routes/call.route');
+
+let formRouter = require('./routes/form.router')
 
 var app = express();
  app.use(cors())
+
+ app.use(session({ cookie: { maxAge: 60000 }, 
+  secret: 'woot',
+  resave: false, 
+  saveUninitialized: false}));
+  
+ app.use(flash());
 
 require('dotenv').config();
 
@@ -36,6 +50,7 @@ app.use(cookieParser());
 
 
 app.use('/', indexRouter);
+app.use('/form', formRouter)
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripRouter);
 app.use('/api/distance', distanceRouter)
