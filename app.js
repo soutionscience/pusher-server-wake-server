@@ -20,9 +20,12 @@ var usersRouter = require('./routes/users');
 let tripRouter = require('./routes/trips.routes')
 
 let distanceScript = require('./scripts/getDistance');
-let callScript = require('./scripts/makeCall')
+let callScript = require('./scripts/makeCall');
+let countryScript = require('./scripts/getCountries');
+
 let distanceRouter = require('./routes/distance');
 let callRouter = require('./routes/call.route');
+let countryRouter = require('./routes/country.route')
 
 let formRouter = require('./routes/form.router')
 
@@ -55,6 +58,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/trips', tripRouter);
 app.use('/api/distance', distanceRouter)
 app.use('/api/call', callRouter)
+app.use('/api/countries', countryRouter)
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -71,6 +75,7 @@ mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err,
 
 //distanceScript.get();
 //callScript.call()
+//countryScript.makeRequest()
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
