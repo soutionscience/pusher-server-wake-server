@@ -36,7 +36,7 @@ exports.delete =(req, res, next)=>{
 }
 
 exports.verify= function(request, responce){
-    console.log('hitting verify')
+   // console.log('hitting verify ', request.body)
     let user  ={};
 
     User.findById(request.params.id, function(err, doc){
@@ -50,7 +50,7 @@ exports.verify= function(request, responce){
         user.verifyAuthyToken(request.body.code, postVerify)
     });
     function postVerify(err){
-        if(err){return die('The token you entered was invalid')}
+        if(err){console.log(err); return die('The token you entered was invalid')}
     
     user.verified = true;
     user.save(postSave)
@@ -59,6 +59,7 @@ exports.verify= function(request, responce){
     // after we save the user, handle sending a confirmation
 
 function postSave(err){
+    console.log('post save called')
     if(err){
         console.log('save error')
      return die('There was a problem validating your account' + '-please enter your token again.')   
@@ -68,17 +69,19 @@ function postSave(err){
     const message = 'You did it! Signup complete :)';
     user.sendMessage(message, function(){
         //show success page
+        console.log('send message')
         request.flash('successes', message);
-        responce.redirect(`api/users/${user._id}`); 
+        responce.status(200).json(user)
     }, function(err){
+        console.log('error sending message ', err)
         request.flash('errors', 'You are signed up, but '
         + 'we could not send you a message. Our bad :(');
     })
 }
 function die(message) {
-    console.log('error ', message)
+   // console.log('error ', message)
     request.flash('errors', message);
-    responce.redirect('api/users/'+request.params.id+'/verify');
+    responce.status(400).send(message)
 }
 };
 // Resend a code if it was not received

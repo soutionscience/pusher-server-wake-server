@@ -86,6 +86,8 @@ UserSchema.methods.verifyAuthyToken = function(opt, cb){
     console.log('user verify called ', opt)
     const self = this;
     authy.verify(self.authyId, opt, function(err, resp){
+        console.log('what is error ', err),
+        console.log('what is resp ', resp)
         cb.call(self, err, resp)
     })
 }
